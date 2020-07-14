@@ -17,9 +17,11 @@ import {
 } from "expo-location";
 
 import api from "../services/api";
-
-import logoImg from "../assets/logo.png";
-
+import perigo from "../assets/perigo_vermelho.png";
+import perigoa from "../assets/perigo_amarelo.png";
+import logoImg from "../assets/icone.png";
+import safe from "../assets/safe.png";
+import safes from "../assets/safes.png";
 import coords from "../database/states";
 
 function Home() {
@@ -87,6 +89,17 @@ function Home() {
     setStates(StatesInfor);
   }
   loadsCasesInformation();
+  function icone(mt){
+    if (mt >= 2000){
+      return perigo;
+    }else if(mt >= 1000 && mt < 2000){
+      return perigoa;
+    }else if(mt >= 100 && mt < 1000 ){
+      return safe;
+    }else if(mt < 100){
+      return safes;
+    }
+  }
   return (
     <Container>
       <StatusBar barStyle="light-content" backgroundColor="#0f7778" />
@@ -100,6 +113,7 @@ function Home() {
         style={{ flex: 1 }}
         initialRegion={region}
       >
+
         {states.map((state) => {
           return (
             <Marker
@@ -109,12 +123,13 @@ function Home() {
                 longitude: Number(state.longitude),
               }}
             >
-              <ImageMarker source={logoImg} />
+              <ImageMarker source={icone(state.deaths)} />
               <Callout>
-                <CalloutContent>
+                <CalloutContent>                  
                   <CalloutText>{state.state}</CalloutText>
                   <CalloutText>Casos Confirmados: {state.cases}</CalloutText>
                   <CalloutText>Mortos: {state.deaths}</CalloutText>
+                  <CalloutText>Suspeitos: {state.suspects}</CalloutText>
                   <CalloutText>
                     Atualizado no dia: {state.formatDateTime}
                   </CalloutText>
@@ -123,6 +138,7 @@ function Home() {
             </Marker>
           );
         })}
+  
       </MapView>
     </Container>
   );

@@ -19,9 +19,10 @@ export const StatusBar = styled.StatusBar``;
 export const CalloutContent = styled.View`
   width: 250px;
   justify-content: center;
+  alignItems: center;
 `;
 export const CalloutText = styled.Text`
-  color: #666;
+  color: #666;  
   font-weight: bold;
 `;
 export const ImageHeader = styled.Image`
@@ -32,5 +33,6 @@ export const ImageHeader = styled.Image`
 export const ImageMarker = styled.Image`
   width: 30px;
   height: 30px;
-  border-radius: 8px;
+  border-radius: 100px;
+  opacity: 0.7;
 `;
